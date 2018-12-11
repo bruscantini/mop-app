@@ -1,57 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Button } from 'react-native';
+import { View, StyleSheet, Text } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-import { Formik, Field } from 'formik';
-import * as firebase from 'firebase';
-import { firebaseConfig } from '../Api';
-import FKTextInput from '../FKTextInput';
-
-// Initialize Firebase
-firebase.initializeApp(firebaseConfig);
+import CustomerSignupForm from '../forms/CustomerSignupForm';
 
 const colors = {
   purple: '#7a44cf',
   white: '#fff'
-};
-
-const validate = ({ firstName, lastName, zip, email, password, confirmPassword }) => {
-  const errors = {};
-  const emailRegex = /^\w+@\w+.\w+$/;
-  if (firstName === undefined) {
-    errors.firstName = 'Required';
-  } else if (firstName.trim() === '') {
-    errors.firstName = 'Must not be blank';
-  }
-  if (lastName === undefined) {
-    errors.lastName = 'Required';
-  } else if (lastName.trim() === '') {
-    errors.lastName = 'Must not be blank';
-  }
-  if (email === undefined) {
-    errors.email = 'Required';
-  } else if (email.trim() === '') {
-    errors.email = 'Must not be blank';
-  } else if (!emailRegex.test(email)) {
-    errors.email = 'must be a valid email address';
-  }
-  if (!password || (password !== confirmPassword)) {
-    errors.confirmPassword = 'Passwords must match';
-  }
-  if (zip && !/\d{5}/.test(zip)) {
-    errors.zip = 'zip code must be 5 digits';
-  }
-  return errors;
-};
-
-const onSubmit = ({ email, password }) => {
-  firebase.auth().createUserWithEmailAndPassword(email, password).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    console.log('firebase: signup error. code: ', errorCode, ', message: ', errorMessage);
-  });
 };
 
 export default class SignupScreen extends Component {
@@ -61,57 +16,7 @@ export default class SignupScreen extends Component {
 
   renderCurrentForm = () => {
     const forms = [
-      (<Formik
-        onSubmit={onSubmit}
-        validate={validate}
-        render={({
-          handleSubmit,
-          isValid,
-        }) => (
-          <View>
-            <Text style={styles.heading}>
-              User Information
-            </Text>
-            <Field
-              component={FKTextInput}
-              name="firstName"
-            />
-            <Field
-              component={FKTextInput}
-              name="lastName"
-            />
-            <Field
-              component={FKTextInput}
-              name="email"
-              autoCapitalize='none'
-              autoCorrect={false}
-            />
-            <Field
-              component={FKTextInput}
-              name="zip"
-            />
-            <Field
-              component={FKTextInput}
-              name="password"
-              autoCapitalize='none'
-              autoCorrect={false}
-              secureTextEntry
-            />
-            <Field
-              component={FKTextInput}
-              name="confirmPassword"
-              autoCapitalize='none'
-              autoCorrect={false}
-              secureTextEntry
-            />
-            <Button
-              title="Sign up"
-              disabled={!isValid}
-              onPress={handleSubmit}
-            />
-          </View>
-        )}
-      />),
+      <CustomerSignupForm />,
       (<Text style={styles.heading}>
         Cleaner Form ...
       </Text>)
