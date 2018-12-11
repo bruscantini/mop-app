@@ -2,7 +2,11 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, ScrollView, Button } from 'react-native';
 import * as firebase from 'firebase';
 
-export default class LoginScreen extends Component {
+import { connect } from 'react-redux';
+import { setAuthentication } from '../redux/reducer';
+
+
+class LoginScreen extends Component {
 
   state = {
     username: '',
@@ -14,6 +18,10 @@ export default class LoginScreen extends Component {
       if (user) {
         // User is signed in.
         console.log('user was successfully signed in');
+
+        // update State
+        this.props.setAuthentication(true);
+
         this.props.navigation.replace('Home');
         unsubscribe();
       } else {
@@ -30,6 +38,7 @@ export default class LoginScreen extends Component {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;
+      console.log('in LoginScreen submit. error: ', { errorCode, errorMessage });
       // ...
     });
   }
@@ -65,10 +74,21 @@ export default class LoginScreen extends Component {
         >
           Don't have an account? Signup.
         </Text>
+        <Text>Signed in: {JSON.stringify(this.props.state.isSignedIn)}</Text>
       </ScrollView>
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { state };
+};
+
+const mapDispatchToProps = {
+  setAuthentication
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 
 const styles = StyleSheet.create({
   container: {

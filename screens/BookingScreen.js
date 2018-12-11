@@ -1,7 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
+import { connect } from 'react-redux';
 
-export default class BookingScreen extends React.Component {
+class BookingScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40 }}>
@@ -10,3 +11,9 @@ export default class BookingScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { isSignedIn: state.isSignedIn };
+};
+
+export default connect(mapStateToProps, null)(BookingScreen);
