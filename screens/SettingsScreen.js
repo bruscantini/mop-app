@@ -1,6 +1,6 @@
 import React from 'react';
 import { Text, View, Button } from 'react-native';
-import * as firebase from 'firebase';
+import { auth } from 'firebase';
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
 
@@ -13,14 +13,11 @@ class SettingsScreen extends React.Component {
         <Button
           title="Sign out"
           onPress={() => {
-            firebase.auth().signOut().then(() => {
-              // Sign-out successful.
+            auth().signOut().then(() => {
               // update State
               this.props.setAuthentication(false);
-
               this.props.navigation.replace('Login');
             }).catch((error) => {
-              // An error happened.
               console.log('could not sign out. error: ', error);
             });
           }}

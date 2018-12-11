@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { StyleSheet, Text, TextInput, ScrollView, Button } from 'react-native';
-import * as firebase from 'firebase';
+import { auth } from 'firebase';
 
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
@@ -29,12 +29,12 @@ class LoginScreen extends Component {
         console.log('user not signed in.');
       }
     };
-    const unsubscribe = firebase.auth().onAuthStateChanged(authStateChangeCallback);
+    const unsubscribe = auth().onAuthStateChanged(authStateChangeCallback);
   }
 
   onSubmit() {
     const { username, password } = this.state;
-    firebase.auth().signInWithEmailAndPassword(username, password).catch((error) => {
+    auth().signInWithEmailAndPassword(username, password).catch((error) => {
       // Handle Errors here.
       const errorCode = error.code;
       const errorMessage = error.message;

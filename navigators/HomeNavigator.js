@@ -1,10 +1,10 @@
 import { createBottomTabNavigator } from 'react-navigation';
-import BookingScreen from '../screens/BookingScreen';
 import OrdersScreen from '../screens/OrdersScreen';
 import SettingsScreen from '../screens/SettingsScreen';
+import BookingNavigator from './BookingNavigator';
 
 const HomeNavigator = createBottomTabNavigator({
-  Book: BookingScreen,
+  Book: BookingNavigator,
   Orders: OrdersScreen,
   Settings: SettingsScreen,
 });
