@@ -10,6 +10,10 @@ const colors = {
 };
 
 export default class SignupScreen extends Component {
+  static navigationOptions = {
+    title: 'Signup'
+  }
+
   state = {
     formVersion: 0
   }

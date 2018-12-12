@@ -7,6 +7,8 @@ const BookingNavigator = createStackNavigator({
   ChooseAddress: ChooseAddressScreen,
   NewAddress: NewAddressScreen,
   Booking: BookingScreen
+}, {
+  initialRouteName: 'ChooseAddress'
 });
 
 export default BookingNavigator;

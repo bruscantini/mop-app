@@ -7,6 +7,9 @@ import { setAuthentication } from '../redux/reducer';
 
 
 class LoginScreen extends Component {
+  static navigationOptions = {
+    title: 'Login'
+  }
 
   state = {
     username: '',

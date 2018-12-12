@@ -3,10 +3,13 @@ import OrdersScreen from '../screens/OrdersScreen';
 import SettingsScreen from '../screens/SettingsScreen';
 import BookingNavigator from './BookingNavigator';
 
-const HomeNavigator = createBottomTabNavigator({
-  Book: BookingNavigator,
+const HomeTabNavigator = createBottomTabNavigator({
   Orders: OrdersScreen,
+  Book: BookingNavigator,
   Settings: SettingsScreen,
+}, {
+  initialRouteName: 'Book',
+  headerMode: 'none'
 });
 
-export default HomeNavigator;
+export default HomeTabNavigator;
