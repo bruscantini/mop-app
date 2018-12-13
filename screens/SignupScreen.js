@@ -6,7 +6,8 @@ import CustomerSignupForm from '../forms/CustomerSignupForm';
 
 const colors = {
   purple: '#7a44cf',
-  white: '#fff'
+  white: '#fff',
+  black: 'black'
 };
 
 export default class SignupScreen extends Component {
@@ -47,12 +48,22 @@ export default class SignupScreen extends Component {
                 {
                   label: 'Customer',
                   value: 0,
-                  customIcon: <AntDesign name="user" size={32} color="black" />
+                  customIcon:
+                    <AntDesign
+                      name="user"
+                      size={32}
+                      color={[colors.white, colors.black][this.state.formVersion]}
+                    />
                 },
                 {
                   label: 'Cleaner',
                   value: 1,
-                  customIcon: <MaterialCommunityIcons name="broom" size={32} color="black" />
+                  customIcon:
+                    <MaterialCommunityIcons
+                      name="broom"
+                      size={32}
+                      color={[colors.black, colors.white][this.state.formVersion]}
+                    />
                 }
             ]}
           />

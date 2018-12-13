@@ -30,6 +30,7 @@ export default class NewAddressScreen extends React.Component {
             // available options: https://developers.google.com/places/web-service/autocomplete
             key: PLACES_API_KEY,
             language: 'en', // language of the results
+            types: 'address'
           }}
 
           styles={{
@@ -47,8 +48,8 @@ export default class NewAddressScreen extends React.Component {
           currentLocation={true} // Will add a 'Current location' button at the top of the predefined places list
           currentLocationLabel="Current location"
           nearbyPlacesAPI='GooglePlacesSearch' // Which API to use: GoogleReverseGeocoding or GooglePlacesSearch
-          debounce={1000} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
-          renderLeftButton={() => <AntDesign name="left" size={30} />}
+          debounce={500} // debounce the requests in ms. Set to 0 to remove debounce. By default 0ms.
+          renderLeftButton={() => {}}
           renderRightButton={() => {}}
         />
       </View>
