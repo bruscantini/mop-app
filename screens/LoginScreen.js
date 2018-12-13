@@ -1,10 +1,17 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TextInput, ScrollView, Button } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, ScrollView } from 'react-native';
 import { auth } from 'firebase';
+import Button from 'react-native-button';
 
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
 
+const colors = {
+  purple: '#7a44cf',
+  white: '#fff',
+  black: 'black',
+  yellow: 'yellow'
+};
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -56,6 +63,7 @@ class LoginScreen extends Component {
         <TextInput
           style={styles.inputBox}
           placeholder='Username'
+          placeholderTextColor={colors.yellow}
           autoCapitalize='none'
           autoCorrect={false}
           keyboardType='email-address'
@@ -65,13 +73,20 @@ class LoginScreen extends Component {
         <TextInput
           style={styles.inputBox}
           placeholder='Password'
+          placeholderTextColor={colors.yellow}
           autoCapitalize='none'
           autoCorrect={false}
           secureTextEntry
           value={this.state.password}
           onChangeText={(text) => this.setState({ password: text })}
         />
-        <Button onPress={this.onSubmit.bind(this)} title='Login' />
+        <Button
+          style={styles.loginButton}
+          styleDisabled={{ color: 'red', backgroundColor: colors.black }}
+          onPress={this.onSubmit.bind(this)}
+        >
+          Login
+        </Button>
         <Text
           onPress={() => { this.props.navigation.navigate('Signup'); }}
           style={styles.signupText}
@@ -97,17 +112,25 @@ export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: colors.purple,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40
+  },
+  loginButton: {
+    borderRadius: 50,
+    borderWidth: 10,
+    borderColor: colors.yellow,
+    backgroundColor: colors.yellow,
+    color: colors.purple
   },
   inputBox: {
     height: 60,
     margin: 10,
     alignSelf: 'stretch',
+    color: colors.yellow,
     borderWidth: 2,
-    borderColor: 'black',
+    borderColor: colors.yellow,
     borderRadius: 20,
     padding: 10
   },
