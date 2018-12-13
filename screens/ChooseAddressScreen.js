@@ -27,7 +27,7 @@ export default class ChooseAddressScreen extends React.Component {
           }}
           onPress={this.onAddButtonPress}
         >
-          <AntDesign name={'pluscircle'} size={100} color='#7a44cf' />
+          <AntDesign name={'pluscircle'} size={99} color='#7a44cf' />
         </TouchableOpacity>
       </View>
     );

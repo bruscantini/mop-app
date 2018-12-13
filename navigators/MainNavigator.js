@@ -8,6 +8,9 @@ const MainNavigator = createStackNavigator({
   Signup: { screen: SignupScreen },
   Home: {
     screen: HomeTabNavigator,
+    navigationOptions: {
+      header: null
+    }
   }
 }, {
   initialRouteName: 'Login'

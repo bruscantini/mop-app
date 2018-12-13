@@ -9,7 +9,12 @@ const HomeTabNavigator = createBottomTabNavigator({
   Settings: SettingsScreen,
 }, {
   initialRouteName: 'Book',
-  headerMode: 'none'
+  tabBarOptions: {
+    tabStyle: {
+      justifyContent: 'center'
+    },
+    showIcon: false
+  }
 });
 
 export default HomeTabNavigator;

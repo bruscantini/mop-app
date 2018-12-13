@@ -6,7 +6,9 @@ import BookingScreen from '../screens/BookingScreen';
 const BookingNavigator = createStackNavigator({
   ChooseAddress: ChooseAddressScreen,
   NewAddress: NewAddressScreen,
-  Booking: BookingScreen
+  Booking: {
+    screen: BookingScreen
+  }
 }, {
   initialRouteName: 'ChooseAddress'
 });

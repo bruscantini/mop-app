@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { StyleSheet, Text, TextInput, ScrollView, Button } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, ScrollView, Button } from 'react-native';
 import { auth } from 'firebase';
 
 import { connect } from 'react-redux';
@@ -7,6 +7,13 @@ import { setAuthentication } from '../redux/reducer';
 
 
 class LoginScreen extends Component {
+  static navigationOptions = {
+    title: 'MopApp',
+    headerTitleContainerStyle: {
+      justifyContent: 'center'
+    }
+  }
+
   state = {
     username: '',
     password: ''
@@ -45,9 +52,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <Text style={styles.heading}>
-          Login
-        </Text>
+        <Image source={require('../assets/broom.png')} />
         <TextInput
           style={styles.inputBox}
           placeholder='Username'
@@ -71,9 +76,9 @@ class LoginScreen extends Component {
           onPress={() => { this.props.navigation.navigate('Signup'); }}
           style={styles.signupText}
         >
-          Don't have an account? Signup.
+          Don't have an account?
+          <Text style={{ color: 'blue', fontWeight: 'bold' }}>  Signup</Text>
         </Text>
-        <Text>Signed in: {JSON.stringify(this.props.state.isSignedIn)}</Text>
       </ScrollView>
     );
   }
