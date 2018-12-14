@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, StyleSheet, Text, ScrollView } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import CustomerSignupForm from '../forms/CustomerSignupForm';
-import colors from '../colors';
+import colors from '../utils/colors';
 
 export default class SignupScreen extends Component {
   static navigationOptions = {
@@ -26,7 +26,7 @@ export default class SignupScreen extends Component {
 
   render() {
     return (
-      <View style={styles.screenContainer}>
+      <ScrollView contentContainerStyle={styles.screenContainer}>
         <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text style={styles.heading}>
             Sign up as a ...
@@ -66,14 +66,16 @@ export default class SignupScreen extends Component {
         <View style={{ flex: 3 }}>
           {this.renderCurrentForm()}
         </View>
-      </View>
+      </ScrollView>
     );
   }
 }
 
 const styles = StyleSheet.create({
   screenContainer: {
-    flex: 1, padding: 40
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20
   },
   container: {
     flex: 1,

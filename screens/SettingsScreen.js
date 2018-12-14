@@ -4,14 +4,13 @@ import { auth } from 'firebase';
 import { connect } from 'react-redux';
 import Button from 'react-native-button';
 import { setAuthentication } from '../redux/reducer';
-import colors from '../colors';
+import colors from '../utils/colors';
 
 class SettingsScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40 }}>
         <Text>Welcome to your Settings!</Text>
-        <Text>Signed In: {JSON.stringify(this.props.state.isSignedIn)}</Text>
         <Button
           style={styles.signoutButton}
           onPress={() => {
@@ -49,7 +48,9 @@ const styles = StyleSheet.create({
     color: colors.purple,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    margin: 10
+    margin: 10,
+    borderWidth: 1,
+    borderColor: colors.purple
   }
 });
 

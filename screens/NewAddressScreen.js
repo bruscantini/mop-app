@@ -3,7 +3,7 @@ import { View } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { MapView } from 'expo';
 import { PLACES_API_KEY } from '../Api';
-import colors from '../colors';
+import colors from '../utils/colors';
 
 export default class NewAddressScreen extends React.Component {
   static navigationOptions = {
@@ -33,6 +33,7 @@ export default class NewAddressScreen extends React.Component {
           scrollEnabled={false}
           zoomEnabled={false}
         />
+        <View style={{ flex: 1, justifyContent: 'flex-start' }} />
         <View
           style={{
             position: 'absolute',

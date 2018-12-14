@@ -2,10 +2,11 @@ import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TextInput, ScrollView } from 'react-native';
 import { auth } from 'firebase';
 import Button from 'react-native-button';
-
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
-import colors from '../colors';
+import colors from '../utils/colors';
+
+const logo = require('../assets/broom.png');
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -53,7 +54,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
-        <Image source={require('../assets/broom.png')} />
+        <Image source={logo} />
         <TextInput
           style={styles.inputBox}
           placeholder='Username'

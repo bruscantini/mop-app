@@ -3,7 +3,7 @@ import { StyleSheet, Text, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
 import colors from '../utils/colors';
 
-const FKTextInput = (props) => {
+const FKPasswordInput = (props) => {
   const {
     field: {
       name,
@@ -18,28 +18,31 @@ const FKTextInput = (props) => {
     placeholder
   } = props;
   return (
-  <View
-    style={styles.inputContainer}
-  >
-    <TextInput
-      onChangeText={onChange(name)}
-      onBlur={onBlur(name)}
-      style={[
-        styles.inputField,
-        {
-          borderColor: errors[name] && touched[name] ? colors.red : colors.black
-        },
-      ]}
-      value={value}
-      placeholder={placeholder}
-      autoCapitalize='words'
-    />
-    {errors[name] && touched[name] && <Text style={styles.rootError}>{errors[name]}</Text>}
-  </View>
-);
+    <View
+      style={styles.inputContainer}
+    >
+      <TextInput
+        onChangeText={onChange(name)}
+        onBlur={onBlur(name)}
+        style={[
+          styles.inputField,
+          {
+            borderColor: errors[name] && touched[name] ? colors.red : colors.black
+          },
+        ]}
+        value={value}
+        placeholder={placeholder}
+        autoCapitalize='none'
+        autoCorrect={false}
+        secureTextEntry
+      />
+      {errors[name] && touched[name] &&
+        <Text style={styles.rootError}>{errors[name]}</Text>}
+    </View>
+  );
 };
 
-FKTextInput.propTypes = {
+FKPasswordInput.propTypes = {
   field: PropTypes.shape({
     name: PropTypes.string.isRequired,
     onBlur: PropTypes.func.isRequired,
@@ -68,4 +71,4 @@ const styles = StyleSheet.create({
   }
 });
 
-export default FKTextInput;
+export default FKPasswordInput;

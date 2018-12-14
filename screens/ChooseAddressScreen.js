@@ -1,7 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
-import colors from '../colors';
+import colors from '../utils/colors';
 
 export default class ChooseAddressScreen extends React.Component {
   static navigationOptions = {

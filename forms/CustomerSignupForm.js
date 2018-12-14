@@ -3,6 +3,8 @@ import { Text, View, Button, StyleSheet } from 'react-native';
 import { Formik, Field } from 'formik';
 import { auth } from 'firebase';
 import FKTextInput from './FKTextInput';
+import FKEmailInput from './FKEmailInput';
+import FKPasswordInput from './FKPasswordInput';
 
 const onSubmit = ({ email, password }) => {
   auth().createUserWithEmailAndPassword(email, password).catch((error) => {
@@ -58,34 +60,32 @@ const CustomerSignupForm = () => (
         <Field
           component={FKTextInput}
           name="firstName"
+          placeholder="First Name"
         />
         <Field
           component={FKTextInput}
           name="lastName"
+          placeholder="Last Name"
         />
         <Field
-          component={FKTextInput}
+          component={FKEmailInput}
           name="email"
-          autoCapitalize='none'
-          autoCorrect={false}
+          placeholder="Email"
         />
         <Field
           component={FKTextInput}
           name="zip"
+          placeholder="Zip Code"
         />
         <Field
-          component={FKTextInput}
+          component={FKPasswordInput}
           name="password"
-          autoCapitalize='none'
-          autoCorrect={false}
-          secureTextEntry
+          placeholder="Password"
         />
         <Field
-          component={FKTextInput}
+          component={FKPasswordInput}
           name="confirmPassword"
-          autoCapitalize='none'
-          autoCorrect={false}
-          secureTextEntry
+          placeholder="Confirm Password"
         />
         <Button
           title="Sign up"
