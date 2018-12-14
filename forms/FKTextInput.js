@@ -1,6 +1,7 @@
 import React from 'react';
 import { StyleSheet, Text, TextInput, View } from 'react-native';
 import PropTypes from 'prop-types';
+import colors from '../colors';
 
 const FKTextInput = (props) => {
   const {
@@ -28,7 +29,7 @@ const FKTextInput = (props) => {
       style={[
         styles.inputField,
         {
-          borderColor: errors[name] && touched[name] ? 'red' : 'black'
+          borderColor: errors[name] && touched[name] ? colors.red : colors.black
         },
       ]}
       value={value}
@@ -65,7 +66,7 @@ const styles = StyleSheet.create({
     paddingLeft: 10,
   },
   rootError: {
-    color: 'red'
+    color: colors.red
   }
 });
 

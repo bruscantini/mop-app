@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { MapView } from 'expo';
 import { PLACES_API_KEY } from '../Api';
+import colors from '../colors';
 
 export default class NewAddressScreen extends React.Component {
   static navigationOptions = {
@@ -73,11 +74,8 @@ export default class NewAddressScreen extends React.Component {
               description: {
                 fontWeight: 'bold'
               },
-              predefinedPlacesDescription: {
-                color: '#1faadb'
-              },
               listView: {
-                backgroundColor: 'rgba(255,255,255,1)'
+                backgroundColor: colors.white
               }
             }}
             nearbyPlacesAPI='GooglePlacesSearch'

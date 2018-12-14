@@ -1,8 +1,10 @@
 import React from 'react';
-import { Text, View, Button } from 'react-native';
+import { Text, View, StyleSheet } from 'react-native';
 import { auth } from 'firebase';
 import { connect } from 'react-redux';
+import Button from 'react-native-button';
 import { setAuthentication } from '../redux/reducer';
+import colors from '../colors';
 
 class SettingsScreen extends React.Component {
   render() {
@@ -10,6 +12,20 @@ class SettingsScreen extends React.Component {
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40 }}>
         <Text>Welcome to your Settings!</Text>
         <Text>Signed In: {JSON.stringify(this.props.state.isSignedIn)}</Text>
+        <Button
+          style={styles.signoutButton}
+          onPress={() => {
+            auth().signOut().then(() => {
+              // update State
+              this.props.setAuthentication(false);
+              this.props.navigation.replace('Login');
+            }).catch((error) => {
+              console.log('could not sign out. error: ', error);
+            });
+          }}
+        >
+          Sign Out
+        </Button>
         <Button
           title="Sign out"
           onPress={() => {
@@ -26,6 +42,16 @@ class SettingsScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  signoutButton: {
+    backgroundColor: colors.yellow,
+    color: colors.purple,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    margin: 10
+  }
+});
 
 const mapStateToProps = state => {
   return { state };

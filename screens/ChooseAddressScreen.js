@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
+import colors from '../colors';
 
 export default class ChooseAddressScreen extends React.Component {
   static navigationOptions = {
@@ -20,14 +21,14 @@ export default class ChooseAddressScreen extends React.Component {
             justifyContent: 'center',
             width: 100,
             height: 100,
-            backgroundColor: '#fff',
+            backgroundColor: colors.white,
             borderRadius: 50,
-            borderColor: 'black',
+            borderColor: colors.black,
             borderWidth: 1,
           }}
           onPress={this.onAddButtonPress}
         >
-          <AntDesign name={'pluscircle'} size={99} color='#7a44cf' />
+          <AntDesign name={'pluscircle'} size={99} color={colors.purple} />
         </TouchableOpacity>
       </View>
     );

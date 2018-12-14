@@ -5,13 +5,7 @@ import Button from 'react-native-button';
 
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
-
-const colors = {
-  purple: '#7a44cf',
-  white: '#fff',
-  black: 'black',
-  yellow: 'yellow'
-};
+import colors from '../colors';
 
 class LoginScreen extends Component {
   static navigationOptions = {
@@ -82,7 +76,7 @@ class LoginScreen extends Component {
         />
         <Button
           style={styles.loginButton}
-          styleDisabled={{ color: 'red', backgroundColor: colors.black }}
+          styleDisabled={{ color: colors.red, backgroundColor: colors.black }}
           onPress={this.onSubmit.bind(this)}
         >
           Login
@@ -92,7 +86,7 @@ class LoginScreen extends Component {
           style={styles.signupText}
         >
           Don't have an account?
-          <Text style={{ color: 'blue', fontWeight: 'bold' }}>  Signup</Text>
+          <Text style={{ color: colors.yellow, fontWeight: 'bold' }}>  Signup</Text>
         </Text>
       </ScrollView>
     );
@@ -118,11 +112,14 @@ const styles = StyleSheet.create({
     padding: 40
   },
   loginButton: {
-    borderRadius: 50,
-    borderWidth: 10,
+    borderRadius: 20,
+    borderWidth: 1,
     borderColor: colors.yellow,
     backgroundColor: colors.yellow,
-    color: colors.purple
+    color: colors.purple,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    margin: 10
   },
   inputBox: {
     height: 60,

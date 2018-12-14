@@ -3,12 +3,7 @@ import { View, StyleSheet, Text } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import CustomerSignupForm from '../forms/CustomerSignupForm';
-
-const colors = {
-  purple: '#7a44cf',
-  white: '#fff',
-  black: 'black'
-};
+import colors from '../colors';
 
 export default class SignupScreen extends Component {
   static navigationOptions = {
