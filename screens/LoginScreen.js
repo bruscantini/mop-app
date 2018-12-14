@@ -12,11 +12,7 @@ class LoginScreen extends Component {
   static navigationOptions = {
     title: 'MopApp',
     headerTitleContainerStyle: {
-      justifyContent: 'center',
-      backgroundColor: colors.darkPurple
-    },
-    headerTitleStyle: {
-      color: colors.yellow
+      justifyContent: 'center'
     }
   }
 
