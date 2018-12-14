@@ -18,7 +18,11 @@ const BookingNavigator = createStackNavigator({
     },
     headerTitleStyle: {
       color: colors.yellow
-    }
+    },
+    headerBackTitleStyle: {
+      color: colors.white
+    },
+    headerTintColor: colors.white
   }
 });
 
