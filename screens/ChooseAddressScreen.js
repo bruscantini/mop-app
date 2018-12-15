@@ -1,9 +1,10 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { connect } from 'react-redux';
+import { View, TouchableOpacity, Text } from 'react-native';
 import { AntDesign } from '@expo/vector-icons';
 import colors from '../utils/colors';
 
-export default class ChooseAddressScreen extends React.Component {
+class ChooseAddressScreen extends React.Component {
   static navigationOptions = {
     title: 'Select Address'
   }
@@ -15,6 +16,12 @@ export default class ChooseAddressScreen extends React.Component {
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40 }}>
+        <Text style={{ margin: 10 }}>
+          {this.props.state.address.name ? (this.props.state.address.name + ': ') : null}
+        </Text>
+        <Text style={{ margin: 10 }}>
+          {this.props.state.address.description ? this.props.state.address.description : null}
+        </Text>
         <TouchableOpacity
         style={{
             alignItems: 'center',
@@ -34,3 +41,9 @@ export default class ChooseAddressScreen extends React.Component {
     );
   }
 }
+
+const mapStateToProps = state => {
+  return { state };
+};
+
+export default connect(mapStateToProps)(ChooseAddressScreen);

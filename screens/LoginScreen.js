@@ -28,7 +28,7 @@ class LoginScreen extends Component {
         console.log('user was successfully signed in');
 
         // update State
-        this.props.setAuthentication(true);
+        this.props.setAuthentication(true, user.uid);
 
         this.props.navigation.replace('Home');
         unsubscribe();
