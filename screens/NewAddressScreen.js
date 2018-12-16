@@ -68,12 +68,12 @@ class NewAddressScreen extends React.Component {
     const addresssDescription = this.state.address.description;
     const userId = this.props.state.authentication.userId;
 
-    database().ref('users/' + userId).set({
-      address: {
-        description: addresssDescription,
-        nickName
-      }
-    });
+    // database().ref('users/' + userId).set({
+    //   address: {
+    //     description: addresssDescription,
+    //     nickName
+    //   }
+    // });
     this.props.setAddress(nickName, addresssDescription);
     this.props.navigation.pop();
   }
