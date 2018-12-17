@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TextInput, ScrollView, ToastAndroid } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, ScrollView,
+  KeyboardAvoidingView, ToastAndroid } from 'react-native';
 import { auth } from 'firebase';
 import Button from 'react-native-button';
 import { connect } from 'react-redux';
@@ -53,6 +54,7 @@ class LoginScreen extends Component {
   render() {
     return (
       <ScrollView contentContainerStyle={styles.container}>
+        <KeyboardAvoidingView behavior='padding' keyboardVerticalOffset={65}>
         <Image source={logo} />
         <TextInput
           style={styles.inputBox}
@@ -88,6 +90,7 @@ class LoginScreen extends Component {
           Don't have an account?
           <Text style={{ color: colors.yellow, fontWeight: 'bold' }}>  Signup</Text>
         </Text>
+        </KeyboardAvoidingView>
       </ScrollView>
     );
   }
