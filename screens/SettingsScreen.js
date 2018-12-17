@@ -7,10 +7,18 @@ import { setAuthentication } from '../redux/reducer';
 import colors from '../utils/colors';
 
 class SettingsScreen extends React.Component {
+  state = {
+    displayName: '',
+  }
+  componentDidMount() {
+    const displayName = auth().currentUser.displayName;
+    this.setState({ displayName });
+  }
   render() {
     return (
       <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', padding: 40 }}>
         <Text>Welcome to your Settings!</Text>
+        <Text>{this.state.displayName}</Text>
         <Button
           style={styles.signoutButton}
           onPress={() => {

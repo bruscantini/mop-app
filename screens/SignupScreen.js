@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Alert } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
+import { auth } from 'firebase';
 import CustomerSignupForm from '../forms/CustomerSignupForm';
 import colors from '../utils/colors';
 
@@ -9,14 +10,29 @@ export default class SignupScreen extends Component {
   static navigationOptions = {
     title: 'Signup'
   }
-
   state = {
     formVersion: 0
   }
-
+  onSubmit = ({ firstName, lastName, email, password }) => {
+    auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+      userCredential.user.updateProfile({ displayName: `${firstName} ${lastName}` });
+      this.props.navigation.popToTop();
+    }).catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log('firebase: signup error. code: ', errorCode, ', message: ', errorMessage);
+      Alert.alert(
+        'Signup Error',
+        error.message,
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed') },
+        ]
+      );
+    });
+  };
   renderCurrentForm = () => {
     const forms = [
-      <CustomerSignupForm />,
+      <CustomerSignupForm onSubmit={this.onSubmit} />,
       (<Text style={styles.heading}>
         Cleaner Form ...
       </Text>)

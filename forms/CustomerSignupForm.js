@@ -1,20 +1,11 @@
 import React from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { Formik, Field } from 'formik';
-import { auth } from 'firebase';
 import FKTextInput from './FKTextInput';
 import FKEmailInput from './FKEmailInput';
 import FKPasswordInput from './FKPasswordInput';
 
-const onSubmit = ({ email, password }) => {
-  auth().createUserWithEmailAndPassword(email, password).catch((error) => {
-    // Handle Errors here.
-    const errorCode = error.code;
-    const errorMessage = error.message;
-
-    console.log('firebase: signup error. code: ', errorCode, ', message: ', errorMessage);
-  });
-};
+const onSubmit = () => {};
 
 const validate = ({ firstName, lastName, zip, email, password, confirmPassword }) => {
   const errors = {};
@@ -45,9 +36,9 @@ const validate = ({ firstName, lastName, zip, email, password, confirmPassword }
   return errors;
 };
 
-const CustomerSignupForm = () => (
+const CustomerSignupForm = (props) => (
   <Formik
-    onSubmit={onSubmit}
+    onSubmit={props.onSubmit || onSubmit}
     validate={validate}
     render={({
       handleSubmit,

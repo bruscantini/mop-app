@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Image, StyleSheet, Text, TextInput, ScrollView } from 'react-native';
+import { Image, StyleSheet, Text, TextInput, ScrollView, ToastAndroid } from 'react-native';
 import { auth } from 'firebase';
 import Button from 'react-native-button';
 import { connect } from 'react-redux';
@@ -25,11 +25,10 @@ class LoginScreen extends Component {
     const authStateChangeCallback = (user) => {
       if (user) {
         // User is signed in.
-        console.log('user was successfully signed in');
-
+        console.log('user was successfully signed in\nuser: ', user);
+        ToastAndroid.show('user signed in', ToastAndroid.SHORT);
         // update State
         this.props.setAuthentication(true, user.uid);
-
         this.props.navigation.replace('Home');
         unsubscribe();
       } else {

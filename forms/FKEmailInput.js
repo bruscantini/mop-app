@@ -32,6 +32,7 @@ const FKEmailInput = (props) => {
         ]}
         value={value}
         placeholder={placeholder}
+        autoCapitalize='none'
         keyboardType='email-address'
       />
       {errors[name] && touched[name] &&
