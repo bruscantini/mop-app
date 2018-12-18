@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, Alert } from 'react-native';
+import { View, StyleSheet, Text, ScrollView, Alert, KeyboardAvoidingView } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { auth } from 'firebase';
+
+
 import CustomerSignupForm from '../forms/CustomerSignupForm';
 import colors from '../utils/colors';
 
@@ -42,8 +44,8 @@ export default class SignupScreen extends Component {
 
   render() {
     return (
+      <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding' keyboardVerticalOffset={65}>
       <ScrollView contentContainerStyle={styles.screenContainer}>
-        <View style={{ flex: 1, justifyContent: 'center' }}>
           <Text style={styles.heading}>
             Sign up as a ...
           </Text>
@@ -78,11 +80,9 @@ export default class SignupScreen extends Component {
                 }
             ]}
           />
-        </View>
-        <View style={{ flex: 3 }}>
           {this.renderCurrentForm()}
-        </View>
       </ScrollView>
+      </ KeyboardAvoidingView>
     );
   }
 }
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
   screenContainer: {
     flex: 1,
     justifyContent: 'center',
-    padding: 20
+    padding: 20,
+    paddingBottom: 60,
   },
   container: {
     flex: 1,
