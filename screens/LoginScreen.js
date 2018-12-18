@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TextInput, ScrollView,
-  KeyboardAvoidingView, ToastAndroid } from 'react-native';
+  KeyboardAvoidingView, Alert } from 'react-native';
 import { auth } from 'firebase';
 import Button from 'react-native-button';
 import { connect } from 'react-redux';
@@ -27,7 +27,6 @@ class LoginScreen extends Component {
       if (user) {
         // User is signed in.
         console.log('user was successfully signed in\nuser: ', user);
-        ToastAndroid.show('user signed in', ToastAndroid.SHORT);
         // update State
         this.props.setAuthentication(true, user.uid);
         this.props.navigation.replace('Home');
@@ -47,7 +46,13 @@ class LoginScreen extends Component {
       const errorCode = error.code;
       const errorMessage = error.message;
       console.log('in LoginScreen submit. error: ', { errorCode, errorMessage });
-      // ...
+      Alert.alert(
+        'Login Error',
+        error.message,
+        [
+          { text: 'OK', onPress: () => console.log('OK Pressed in SignupError alert.') },
+        ]
+      );
     });
   }
 

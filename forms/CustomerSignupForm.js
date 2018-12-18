@@ -43,6 +43,7 @@ const CustomerSignupForm = (props) => (
     render={({
       handleSubmit,
       isValid,
+      isSubmitting
     }) => (
       <View>
         <Text style={styles.heading}>
@@ -80,7 +81,7 @@ const CustomerSignupForm = (props) => (
         />
         <Button
           title="Sign up"
-          disabled={!isValid}
+          disabled={!isValid || isSubmitting}
           onPress={handleSubmit}
         />
       </View>

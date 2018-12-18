@@ -14,9 +14,11 @@ export default class SignupScreen extends Component {
   state = {
     formVersion: 0
   }
-  onSubmit = ({ firstName, lastName, email, password }) => {
+  onSubmit = ({ firstName, lastName, email, password }, actions) => {
+    actions.setSubmitting(true);
     auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
       userCredential.user.updateProfile({ displayName: `${firstName} ${lastName}` });
+      actions.setSubmitting(false);
       this.props.navigation.popToTop();
     }).catch((error) => {
       const errorCode = error.code;
@@ -26,9 +28,10 @@ export default class SignupScreen extends Component {
         'Signup Error',
         error.message,
         [
-          { text: 'OK', onPress: () => console.log('OK Pressed') },
+          { text: 'OK', onPress: () => console.log('OK Pressed in SignupError alert.') },
         ]
       );
+      actions.setSubmitting(false);
     });
   };
   renderCurrentForm = () => {
@@ -91,7 +94,6 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     padding: 20,
-    paddingBottom: 60,
   },
   container: {
     flex: 1,
