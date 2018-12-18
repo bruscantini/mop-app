@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, ScrollView, Alert, KeyboardAvoidingView } from 'react-native';
+import { StyleSheet, Text, ScrollView, Alert } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
 import { auth } from 'firebase';
-
-
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomerSignupForm from '../forms/CustomerSignupForm';
 import colors from '../utils/colors';
 
@@ -44,7 +43,7 @@ export default class SignupScreen extends Component {
 
   render() {
     return (
-      <KeyboardAvoidingView style={{ flex: 1 }} behavior='padding' keyboardVerticalOffset={65}>
+      <KeyboardAwareScrollView enableOnAndroid scrollEnabled>
       <ScrollView contentContainerStyle={styles.screenContainer}>
           <Text style={styles.heading}>
             Sign up as a ...
@@ -82,7 +81,7 @@ export default class SignupScreen extends Component {
           />
           {this.renderCurrentForm()}
       </ScrollView>
-      </ KeyboardAvoidingView>
+      </ KeyboardAwareScrollView>
     );
   }
 }

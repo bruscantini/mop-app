@@ -5,6 +5,7 @@ import { MapView } from 'expo';
 import { Formik, Field } from 'formik';
 import { database } from 'firebase';
 import { connect } from 'react-redux';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { setAuthentication, setAddress } from '../redux/reducer';
 import FKTextInput from '../forms/FKTextInput';
 import { PLACES_API_KEY } from '../Api';
@@ -90,10 +91,12 @@ class NewAddressScreen extends React.Component {
           zoomEnabled={false}
           onRegionChangeComplete={() => {}}
         />
-        <View style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 20 }}>
-          {this.state.address ?
-            <NewAddressForm onSubmit={(props) => (this.onSubmit(props))} /> : null}
-        </View>
+        <KeyboardAwareScrollView enableOnAndroid scrollEnabled>
+          <View style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 20 }}>
+            {this.state.address ?
+              <NewAddressForm onSubmit={(props) => (this.onSubmit(props))} /> : null}
+          </View>
+        </KeyboardAwareScrollView >
         <View
           style={{
             position: 'absolute',

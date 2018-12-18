@@ -27,7 +27,8 @@ const FKTextInput = (props) => {
       style={[
         styles.inputField,
         {
-          borderColor: errors[name] && touched[name] ? colors.red : colors.black
+          borderColor: errors[name] && touched[name] ? colors.red : colors.black,
+          marginBottom: errors[name] && touched[name] ? 0 : 14
         },
       ]}
       value={value}
