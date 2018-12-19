@@ -1,16 +1,15 @@
 import React from 'react';
-import { View, Text, Button, StyleSheet } from 'react-native';
+import { View } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { MapView } from 'expo';
-import { Formik, Field } from 'formik';
 import * as firebase from 'firebase';
 import 'firebase/firestore';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { setAuthentication, setAddress } from '../redux/reducer';
-import FKTextInput from '../forms/FKTextInput';
 import { PLACES_API_KEY } from '../Api';
 import colors from '../utils/colors';
+import NewAddressForm from '../forms/NewAddressForm';
 
 // we could eventually make this based on users last known location?
 const initialRegion = {
@@ -19,40 +18,6 @@ const initialRegion = {
   latitudeDelta: 0.0922,
   longitudeDelta: 0.0421,
 };
-
-const validate = ({ nickname }) => {
-  const errors = {};
-  if (nickname === undefined) {
-    errors.nickname = 'Required';
-  } else if (nickname.trim() === '') {
-    errors.nickname = 'Must not be blank';
-  }
-};
-
-const NewAddressForm = (props) => (
-  <Formik
-    onSubmit={props.onSubmit}
-    validate={validate}
-    render={({
-      handleSubmit,
-      isValid,
-    }) => (
-      <View>
-        <Text style={styles.heading}>Nickname</Text>
-        <Field
-          component={FKTextInput}
-          name='nickname'
-          placeholder='e.g. Home'
-        />
-        <Button
-          title="Save"
-          disabled={!isValid}
-          onPress={handleSubmit}
-        />
-      </View>
-    )}
-  />
-);
 
 class NewAddressScreen extends React.Component {
   static navigationOptions = {
@@ -163,12 +128,5 @@ const mapDispatchToProps = {
   setAuthentication,
   setAddress
 };
-
-const styles = StyleSheet.create({
-  heading: {
-    fontSize: 20,
-    margin: 10
-  },
-});
 
 export default connect(mapStateToProps, mapDispatchToProps)(NewAddressScreen);

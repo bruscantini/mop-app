@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TextInput, ScrollView,
   KeyboardAvoidingView, Alert } from 'react-native';
-import { auth } from 'firebase';
 import Button from 'react-native-button';
 import { connect } from 'react-redux';
+import { auth } from 'firebase';
 import { setAuthentication } from '../redux/reducer';
 import colors from '../utils/colors';
 

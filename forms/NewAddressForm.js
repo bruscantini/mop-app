@@ -1,15 +1,15 @@
 import React from 'react';
 import { Text, View, Button, StyleSheet } from 'react-native';
 import { Formik, Field } from 'formik';
-import { auth } from 'firebase';
 import FKTextInput from './FKTextInput';
 
-const onSubmit = () => {
-
-};
-
-const validate = () => {
-
+const validate = ({ nickname }) => {
+  const errors = {};
+  if (nickname === undefined) {
+    errors.nickname = 'Required';
+  } else if (nickname.trim() === '') {
+    errors.nickname = 'Must not be blank';
+  }
 };
 
 const NewAddressForm = (props) => (
@@ -21,7 +21,7 @@ const NewAddressForm = (props) => (
       isValid,
     }) => (
       <View>
-        <Text>Nickname</Text>
+        <Text style={styles.heading}>Nickname</Text>
         <Field
           component={FKTextInput}
           name='nickname'
@@ -38,7 +38,10 @@ const NewAddressForm = (props) => (
 );
 
 const styles = StyleSheet.create({
-
+  heading: {
+    fontSize: 20,
+    margin: 10
+  },
 });
 
 export default NewAddressForm;
