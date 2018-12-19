@@ -2,10 +2,22 @@ import React, { Component } from 'react';
 import { StyleSheet, Text, ScrollView, Alert } from 'react-native';
 import SwitchSelector from 'react-native-switch-selector';
 import { MaterialCommunityIcons, AntDesign } from '@expo/vector-icons';
-import { auth } from 'firebase';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import CustomerSignupForm from '../forms/CustomerSignupForm';
 import colors from '../utils/colors';
+
+const createUserInDatabase = (uid, displayName) => {
+  const db = firebase.firestore();
+  db.collection('users').add({
+    displayName
+  }).then((docRef) => {
+      console.log('Document written with ID: ', docRef.id);
+  }).catch((error) => {
+      console.error('Error adding document: ', error);
+  });
+};
 
 export default class SignupScreen extends Component {
   static navigationOptions = {
@@ -16,8 +28,9 @@ export default class SignupScreen extends Component {
   }
   onSubmit = ({ firstName, lastName, email, password }, actions) => {
     actions.setSubmitting(true);
-    auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
+    firebase.auth().createUserWithEmailAndPassword(email, password).then((userCredential) => {
       userCredential.user.updateProfile({ displayName: `${firstName} ${lastName}` });
+      createUserInDatabase(userCredential.user.uid, `${firstName} ${lastName}`);
       actions.setSubmitting(false);
       this.props.navigation.popToTop();
     }).catch((error) => {

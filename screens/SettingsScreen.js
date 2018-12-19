@@ -33,18 +33,6 @@ class SettingsScreen extends React.Component {
         >
           Sign Out
         </Button>
-        <Button
-          title="Sign out"
-          onPress={() => {
-            auth().signOut().then(() => {
-              // update State
-              this.props.setAuthentication(false);
-              this.props.navigation.replace('Login');
-            }).catch((error) => {
-              console.log('could not sign out. error: ', error);
-            });
-          }}
-        />
       </View>
     );
   }

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TextInput, ScrollView,
   KeyboardAvoidingView, Alert } from 'react-native';
-import { auth, database } from 'firebase';
+import { auth } from 'firebase';
 import Button from 'react-native-button';
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
@@ -26,11 +26,11 @@ class LoginScreen extends Component {
     const authStateChangeCallback = (user) => {
       if (user) {
         // User is signed in.
-        console.log('user was successfully signed in\nuser: ', user);
+        console.log('authStateChangeCallback: user was successfully signed in.\ndisplayName: ', user.displayName);
         // update State
         this.props.setAuthentication(true, user);
-        this.props.navigation.replace('Home');
         unsubscribe();
+        this.props.navigation.replace('Home');
       } else {
         // No user is signed in.
         console.log('user not signed in.');
@@ -51,18 +51,12 @@ class LoginScreen extends Component {
         'Login Error',
         error.message,
         [
-          { text: 'OK', onPress: () => console.log('OK Pressed in SignupError alert.') },
+          { text: 'OK', onPress: () => console.log('OK Pressed in LoginError alert.') },
         ]
       );
     }).then(() => {
       // Loading Screen WIP
-      // this.props.navigation.navigate('Loading');      
-      // const userId = auth().currentUser.uid;
-      // database().ref(`/users/${userId}`).once('address').then((snapshot) => {
-      //   const addresses = (snapshot.val() && snapshot.val().description) || 'Van by the river';
-      //   // ...
-      // });
-      this.props.navigation.replace('Home');
+      // this.props.navigation.navigate('Loading');
     });
   }
 

@@ -24,7 +24,7 @@ const NewAddressForm = (props) => (
         <Text>Nickname</Text>
         <Field
           component={FKTextInput}
-          name='nickName'
+          name='nickname'
           placeholder='e.g. Home'
         />
         <Button

@@ -4,6 +4,7 @@ import { createStore } from 'redux';
 import React, { Component } from 'react';
 import { YellowBox } from 'react-native';
 import * as firebase from 'firebase';
+import 'firebase/firestore';
 import _ from 'lodash';
 import { firebaseConfig } from './Api';
 import mopAppReducer from './redux/reducer';
@@ -19,6 +20,13 @@ console.warn = message => {
 
 // Initialize Firebase
 firebase.initializeApp(firebaseConfig);
+// Initialize Cloud Firestore through Firebase
+const db = firebase.firestore();
+// Disable deprecated features
+db.settings({
+  timestampsInSnapshots: true
+});
+
 // Create redux store
 const store = createStore(mopAppReducer);
 const NavigatorContainer = createAppContainer(MainNavigator);

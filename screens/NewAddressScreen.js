@@ -3,7 +3,8 @@ import { View, Text, Button, StyleSheet } from 'react-native';
 import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
 import { MapView } from 'expo';
 import { Formik, Field } from 'formik';
-import { database } from 'firebase';
+import * as firebase from 'firebase';
+import 'firebase/firestore';
 import { connect } from 'react-redux';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { setAuthentication, setAddress } from '../redux/reducer';
@@ -19,12 +20,12 @@ const initialRegion = {
   longitudeDelta: 0.0421,
 };
 
-const validate = ({ nickName }) => {
+const validate = ({ nickname }) => {
   const errors = {};
-  if (nickName === undefined) {
-    errors.nickName = 'Required';
-  } else if (nickName.trim() === '') {
-    errors.nickName = 'Must not be blank';
+  if (nickname === undefined) {
+    errors.nickname = 'Required';
+  } else if (nickname.trim() === '') {
+    errors.nickname = 'Must not be blank';
   }
 };
 
@@ -40,7 +41,7 @@ const NewAddressForm = (props) => (
         <Text style={styles.heading}>Nickname</Text>
         <Field
           component={FKTextInput}
-          name='nickName'
+          name='nickname'
           placeholder='e.g. Home'
         />
         <Button
@@ -61,26 +62,20 @@ class NewAddressScreen extends React.Component {
     region: initialRegion
   }
 
-  onRegionChange(region) {
-    this.setState({ region });
-  }
-
-  onSubmit({ nickName }) {
-    const addresssDescription = this.state.address.description;
+  onSubmit = ({ nickname }) => {
+    const description = this.state.address.description;
     const userId = this.props.state.authentication.user.uid;
     // we have to add it to a list of addresses.
     // make a list of addresses.
-    try {
-      database().ref(`users/${userId}`).set({
-        address: {
-          description: addresssDescription,
-          nickName
-        }
-      });
-    } catch (error) {
-      console.log('database error: ', error);
-    }
-    this.props.setAddress(nickName, addresssDescription);
+    const db = firebase.firestore();
+    db.collection(`users/${userId}/addresses`).add({
+      nickname, description
+    }).then((docRef) => {
+        console.log('Document written with ID: ', docRef.id);
+    }).catch((error) => {
+        console.error('Error adding document: ', error);
+    });
+    this.props.setAddress(nickname, description);
     this.props.navigation.pop();
   }
 
@@ -94,12 +89,11 @@ class NewAddressScreen extends React.Component {
           rotateEnabled={false}
           scrollEnabled={false}
           zoomEnabled={false}
-          onRegionChangeComplete={() => {}}
         />
         <KeyboardAwareScrollView enableOnAndroid scrollEnabled>
           <View style={{ flex: 1, justifyContent: 'flex-start', paddingTop: 20 }}>
             {this.state.address ?
-              <NewAddressForm onSubmit={(props) => (this.onSubmit(props))} /> : null}
+              <NewAddressForm onSubmit={this.onSubmit} /> : null}
           </View>
         </KeyboardAwareScrollView >
         <View
