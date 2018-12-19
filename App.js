@@ -21,7 +21,6 @@ console.warn = message => {
 firebase.initializeApp(firebaseConfig);
 // Create redux store
 const store = createStore(mopAppReducer);
-
 const NavigatorContainer = createAppContainer(MainNavigator);
 
 export default class App extends Component {

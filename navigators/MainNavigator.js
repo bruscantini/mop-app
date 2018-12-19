@@ -1,6 +1,7 @@
 import { createStackNavigator } from 'react-navigation';
 import LoginScreen from '../screens/LoginScreen';
 import SignupScreen from '../screens/SignupScreen';
+import LoadingScreen from '../screens/LoadingScreen';
 import HomeTabNavigator from '../navigators/HomeTabNavigator';
 import colors from '../utils/colors';
 
@@ -12,6 +13,9 @@ const MainNavigator = createStackNavigator({
     navigationOptions: {
       header: null
     }
+  },
+  Loading: {
+    screen: LoadingScreen,
   }
 }, {
   initialRouteName: 'Login',

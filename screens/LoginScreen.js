@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Image, StyleSheet, Text, TextInput, ScrollView,
   KeyboardAvoidingView, Alert } from 'react-native';
-import { auth } from 'firebase';
+import { auth, database } from 'firebase';
 import Button from 'react-native-button';
 import { connect } from 'react-redux';
 import { setAuthentication } from '../redux/reducer';
@@ -28,12 +28,13 @@ class LoginScreen extends Component {
         // User is signed in.
         console.log('user was successfully signed in\nuser: ', user);
         // update State
-        this.props.setAuthentication(true, user.uid);
+        this.props.setAuthentication(true, user);
         this.props.navigation.replace('Home');
         unsubscribe();
       } else {
         // No user is signed in.
         console.log('user not signed in.');
+        this.props.setAuthentication(false);
       }
     };
     const unsubscribe = auth().onAuthStateChanged(authStateChangeCallback);
@@ -53,6 +54,15 @@ class LoginScreen extends Component {
           { text: 'OK', onPress: () => console.log('OK Pressed in SignupError alert.') },
         ]
       );
+    }).then(() => {
+      // Loading Screen WIP
+      // this.props.navigation.navigate('Loading');      
+      // const userId = auth().currentUser.uid;
+      // database().ref(`/users/${userId}`).once('address').then((snapshot) => {
+      //   const addresses = (snapshot.val() && snapshot.val().description) || 'Van by the river';
+      //   // ...
+      // });
+      this.props.navigation.replace('Home');
     });
   }
 

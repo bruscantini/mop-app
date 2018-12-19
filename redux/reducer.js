@@ -9,8 +9,8 @@ export const SET_ADDRESS = 'SET_ADDRESS';
 /*
 * action creators
 */
-export function setAuthentication(signedIn, userId) {
-  return { type: SET_AUTHENTICATION, signedIn, userId };
+export function setAuthentication(signedIn, user) {
+  return { type: SET_AUTHENTICATION, signedIn, user };
 }
 export function setAddress(name, description) {
   return { type: SET_ADDRESS, name, description };
@@ -19,11 +19,12 @@ export function setAddress(name, description) {
 /*
 * reducers
 */
-function authentication(state = { isSignedIn: false, userId: null }, action) {
-  switch (action.type) {
+function authentication(state = { isSignedIn: false, user: {} }, action) {
+  const { signedIn, type, user = state.user } = action;
+  switch (type) {
     case SET_AUTHENTICATION:
-      return action.signedIn !== 'undefined' ?
-        { isSignedIn: action.signedIn, userId: action.userId } : state;
+      return signedIn !== 'undefined' ?
+        { isSignedIn: signedIn, user } : state;
     default:
       return state;
   }

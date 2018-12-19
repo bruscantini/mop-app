@@ -67,14 +67,19 @@ class NewAddressScreen extends React.Component {
 
   onSubmit({ nickName }) {
     const addresssDescription = this.state.address.description;
-    const userId = this.props.state.authentication.userId;
-
-    // database().ref('users/' + userId).set({
-    //   address: {
-    //     description: addresssDescription,
-    //     nickName
-    //   }
-    // });
+    const userId = this.props.state.authentication.user.uid;
+    // we have to add it to a list of addresses.
+    // make a list of addresses.
+    try {
+      database().ref(`users/${userId}`).set({
+        address: {
+          description: addresssDescription,
+          nickName
+        }
+      });
+    } catch (error) {
+      console.log('database error: ', error);
+    }
     this.props.setAddress(nickName, addresssDescription);
     this.props.navigation.pop();
   }

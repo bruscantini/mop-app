@@ -11,7 +11,7 @@ class SettingsScreen extends React.Component {
     displayName: '',
   }
   componentDidMount() {
-    const displayName = auth().currentUser.displayName;
+    const displayName = this.props.state.authentication.user.displayName;
     this.setState({ displayName });
   }
   render() {

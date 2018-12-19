@@ -84,7 +84,7 @@ export default class SignupScreen extends Component {
           />
           {this.renderCurrentForm()}
       </ScrollView>
-      </ KeyboardAwareScrollView>
+      </KeyboardAwareScrollView>
     );
   }
 }
