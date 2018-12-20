@@ -15,7 +15,7 @@ class ChooseAddressScreen extends React.Component {
   }
 
   state = {
-    addresses: []
+    addresses: [],
   }
 
   componentDidMount() {
@@ -23,37 +23,44 @@ class ChooseAddressScreen extends React.Component {
     const displayName = this.props.state.authentication.user.displayName;
     const userId = this.props.state.authentication.user.uid;
     const collectionRef = db.collection(`users/${userId}/addresses`);
-
-    collectionRef.onSnapshot((querySnapshot) => {
+    const unsubscribe = collectionRef.onSnapshot((querySnapshot) => {
         const addresses = [];
         querySnapshot.forEach((doc) => {
-            addresses.push(doc.data());
+            addresses.push({ key: doc.id, ...doc.data() });
         });
         console.log(`Current addresses for: ${displayName}\n`,
           addresses.map((addy) => (JSON.stringify(addy))).join(', '));
         this.setState({ addresses });
     });
+    this.dbListenerUnsubscribe = unsubscribe;
+  }
+
+  componentWillUnmount() {
+    this.dbListenerUnsubscribe();
   }
 
   onAddButtonPress = () => {
     this.props.navigation.navigate('NewAddress');
   }
 
+  // reference to firestore listener unsubscribe
+  dbListenerUnsubscribe = null
+
   render() {
     return (
-      <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', padding: 40 }}>
+      <ScrollView contentContainerStyle={{ flex: 1, justifyContent: 'flex-start', alignItems: 'center', padding: 10 }}>
         {this.state.addresses.map((addy) => {
-          const { nickname, description } = addy;
+          const { key, nickname, description } = addy;
           return (
-            <View style={{ alignItems: 'center', flexWrap: 'wrap', paddingBottom: 20 }}>
+            <View style={{ alignItems: 'center', flexWrap: 'wrap', paddingBottom: 10 }} key={key}>
               <CardViewWithIcon
                 withBackground={false}
                 androidIcon={'ios-home'}
                 iosIcon={'ios-home'}
-                iconHeight={30}
+                iconHeight={25}
                 iconColor={'#333'}
                 title={nickname}
-                contentFontSize={20}
+                contentFontSize={16}
                 titleFontSize={12}
                 style={miniCardStyle}
                 content={description}
