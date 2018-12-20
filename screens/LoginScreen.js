@@ -26,7 +26,8 @@ class LoginScreen extends Component {
     const authStateChangeCallback = (user) => {
       if (user) {
         // User is signed in.
-        console.log('authStateChangeCallback: user was successfully signed in.\ndisplayName: ', user.displayName);
+        console.log('authStateChangeCallback: user was successfully signed in.\ndisplayName: ',
+          user.displayName, ', uid: ', user.uid);
         // update State
         this.props.setAuthentication(true, user);
         unsubscribe();
@@ -68,7 +69,7 @@ class LoginScreen extends Component {
         <TextInput
           style={styles.inputBox}
           placeholder='Username'
-          placeholderTextColor={colors.yellow}
+          placeholderTextColor={colors.white}
           autoCapitalize='none'
           autoCorrect={false}
           keyboardType='email-address'
@@ -78,7 +79,7 @@ class LoginScreen extends Component {
         <TextInput
           style={styles.inputBox}
           placeholder='Password'
-          placeholderTextColor={colors.yellow}
+          placeholderTextColor={colors.white}
           autoCapitalize='none'
           autoCorrect={false}
           secureTextEntry
@@ -97,7 +98,7 @@ class LoginScreen extends Component {
           style={styles.signupText}
         >
           Don't have an account?
-          <Text style={{ color: colors.yellow, fontWeight: 'bold' }}>  Signup</Text>
+          <Text style={{ color: colors.white, fontWeight: 'bold' }}>  Signup</Text>
         </Text>
         </KeyboardAvoidingView>
       </ScrollView>
@@ -118,7 +119,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(LoginScreen);
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: colors.purple,
+    backgroundColor: colors.pink,
     alignItems: 'center',
     justifyContent: 'center',
     padding: 40
@@ -126,20 +127,20 @@ const styles = StyleSheet.create({
   loginButton: {
     borderRadius: 20,
     borderWidth: 1,
-    borderColor: colors.yellow,
-    backgroundColor: colors.yellow,
-    color: colors.purple,
+    borderColor: colors.white,
+    backgroundColor: colors.white,
+    color: colors.pink,
     paddingVertical: 10,
     paddingHorizontal: 20,
-    margin: 10
+    margin: 10,
   },
   inputBox: {
     height: 60,
     margin: 10,
     alignSelf: 'stretch',
-    color: colors.yellow,
+    color: colors.white,
     borderWidth: 2,
-    borderColor: colors.yellow,
+    borderColor: colors.white,
     borderRadius: 20,
     padding: 10
   },

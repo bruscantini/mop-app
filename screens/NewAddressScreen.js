@@ -33,6 +33,7 @@ class NewAddressScreen extends React.Component {
     // we have to add it to a list of addresses.
     // make a list of addresses.
     const db = firebase.firestore();
+    console.log('saving address for userId: ', userId);
     db.collection(`users/${userId}/addresses`).add({
       nickname, description
     }).then((docRef) => {

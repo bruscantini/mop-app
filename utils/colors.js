@@ -4,7 +4,8 @@ const colors = {
   black: 'black',
   yellow: 'yellow',
   red: 'red',
-  darkPurple: '#5E0BA9'
+  darkPurple: '#5E0BA9',
+  pink: '#F5BFE6'
 };
 
 export default colors;

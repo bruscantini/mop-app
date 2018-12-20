@@ -10,10 +10,10 @@ import colors from '../utils/colors';
 
 const createUserInDatabase = (uid, displayName) => {
   const db = firebase.firestore();
-  db.collection('users').add({
-    displayName
+  db.collection('users').doc(uid).add({
+    uid, displayName
   }).then((docRef) => {
-      console.log('Document written with ID: ', docRef.id);
+      console.log(`User ${uid} added to Users collection as: `, docRef.id);
   }).catch((error) => {
       console.error('Error adding document: ', error);
   });
